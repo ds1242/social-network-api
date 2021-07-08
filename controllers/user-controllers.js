@@ -18,4 +18,7 @@ const userController = {
             .then(dbUserCreate => res.json(dbUserCreate))
             .catch(err => res.json(err))
     }
-}
+};
+
+
+module.exports = userController;
