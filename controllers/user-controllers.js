@@ -37,6 +37,22 @@ const userController = {
             .then(dbUserCreate => res.json(dbUserCreate))
             .catch(err => res.json(err))
     },
+    // add a friend
+    addFriend({ params, body }, res) {
+        User.findOneAndUpdate (
+            { _id: params.userId },
+            { $push: { friends: body } },
+            { new: true, runValidators: true }
+        )
+        .then(dbAddFriendData => {
+            if(!dbAddFriendData) {
+                res.status(404).json({ message: 'No user data to add a friend' });
+                return;
+            }
+            res.json(dbAddFriendData)
+        })
+        .catch(err => res.json(err));
+    },
     // update a user
     updateUser({ params, body }, res) {
         User.findOneAndUpdate(
