@@ -37,7 +37,7 @@ const userController = {
             .then(dbUserCreate => res.json(dbUserCreate))
             .catch(err => res.json(err))
     },
-    // add a friend
+    // add a friend id to friend list array
     addFriend({ params, body }, res) {
         User.findOneAndUpdate (
             { _id: params.userId },
@@ -81,6 +81,7 @@ const userController = {
             })
             .catch(err => res.status(400).json(err))
     },
+    // delete friend from list
     deleteFriend({ params }, res ) {
         User.findOneAndUpdate(
             { _id: params.userId },
