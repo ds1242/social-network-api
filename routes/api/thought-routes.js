@@ -3,15 +3,23 @@ const router = require('express').Router();
 
 const {
     createThought,
-    getAllThought
+    getAllThought,
+    getSingleThought
 } = require('../../controllers/thought-controllers');
 
+// get all thoughts
 router
     .route('/')
     .get(getAllThought);
     
-    
-router.route('/:userId').post(createThought);
+// post thought 
+router
+    .route('/:userId')
+    .post(createThought);
 
+// get thought by id
+router
+    .route('/:userId/:thoughtId')
+    .get(getSingleThought)
 
 module.exports = router;

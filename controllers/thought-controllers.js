@@ -23,13 +23,24 @@ const thoughtController = {
     // Get all Thoughts
     getAllThought(req, res) {
         Thought.find({})
-            .populate({
-                path: 'thought'
-            })
             .then(dbThoughtData => res.json(dbThoughtData))
             .catch(err => {
-                res.status(400).json(err, { message: 'something went wrong getting thought data' })
+                res.status(400).json({ message: 'something went wrong getting thought data' })
             })
+    },
+
+    getSingleThought({ params }, res) {
+        Thought.findOne({ _id: params.thoughtId })
+            .then(dbSingleThought => {
+                if(!dbSingleThought) {
+                    res.status(404).json({ message: 'No thought found with this id' });
+                    return;
+                }
+                res.json(dbSingleThought)
+            })
+            .catch(err => {
+                res.status(400).json({ message: 'error trying to find a single thought' });
+            });
     }
 
 };
