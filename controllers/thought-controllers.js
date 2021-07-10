@@ -31,6 +31,7 @@ const thoughtController = {
     // get a thought by _id
     getSingleThought({ params }, res) {
         Thought.findOne({ _id: params.thoughtId })
+            .select('-__v')
             .then(dbSingleThought => {
                 if(!dbSingleThought) {
                     res.status(404).json({ message: 'No thought found with this id' });

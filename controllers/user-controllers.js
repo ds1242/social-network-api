@@ -20,6 +20,7 @@ const userController = {
             .populate({
                 path: 'thought'
             })
+            .select('-__v')
             .then(dbUserFindOneData => {
                 if(!dbUserFindOneData) {
                     res.status(404).json({message: 'No user found with this id' });
