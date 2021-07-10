@@ -12,16 +12,21 @@ const {
 router
     .route('/')
     .get(getAllThought);
-    
-// post thought 
+
 router
     .route('/:userId')
     .post(createThought);
+    
+// post thought 
+router
+    .route('/:thoughtId')  
+    .get(getSingleThought);
 
 // get thought by id
 router
     .route('/:userId/:thoughtId')
-    .get(getSingleThought)
-    .delete(deleteThought)
+    .delete(deleteThought);
+    
+    
 
 module.exports = router;
