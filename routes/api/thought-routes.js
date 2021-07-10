@@ -4,7 +4,8 @@ const router = require('express').Router();
 const {
     createThought,
     getAllThought,
-    getSingleThought
+    getSingleThought,
+    deleteThought
 } = require('../../controllers/thought-controllers');
 
 // get all thoughts
@@ -21,5 +22,6 @@ router
 router
     .route('/:userId/:thoughtId')
     .get(getSingleThought)
+    .delete(deleteThought)
 
 module.exports = router;
