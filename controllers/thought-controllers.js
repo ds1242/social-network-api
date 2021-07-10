@@ -28,7 +28,7 @@ const thoughtController = {
                 res.status(400).json({ message: 'something went wrong getting thought data' })
             })
     },
-
+    // get a thought by _id
     getSingleThought({ params }, res) {
         Thought.findOne({ _id: params.thoughtId })
             .then(dbSingleThought => {
@@ -42,7 +42,23 @@ const thoughtController = {
                 res.status(400).json({ message: 'error trying to find a single thought' });
             });
     },
-
+    // update a thought
+    updateThought({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            body,
+            { new:true, runValidators: true}
+            )
+            .then(dbThoughtUpdate => {
+                if(!dbThoughtUpdate) {
+                    res.status(404).json({ message: 'Unable to find a thought with this id' });
+                    return;
+                }
+                res.json(dbThoughtUpdate)
+            })
+            .catch(err => res.status(400).json(err));
+    },
+    // delete the thought and remove the id from the user thoughts array
     deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.thoughtId })
             .then(deletedThought => {

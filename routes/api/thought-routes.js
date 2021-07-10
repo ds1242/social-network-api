@@ -5,7 +5,8 @@ const {
     createThought,
     getAllThought,
     getSingleThought,
-    deleteThought
+    deleteThought,
+    updateThought
 } = require('../../controllers/thought-controllers');
 
 // get all thoughts
@@ -20,7 +21,8 @@ router
 // post thought 
 router
     .route('/:thoughtId')  
-    .get(getSingleThought);
+    .get(getSingleThought)
+    .put(updateThought);
 
 // get thought by id
 router
