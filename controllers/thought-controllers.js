@@ -95,6 +95,16 @@ const thoughtController = {
                 res.json(dbUserData)
             })
             .catch(err => res.json({message: 'error deleting a comment' }));
+    },
+    // remove reaction
+    removeReaction({ params }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $pull: { reactions: { reactionId: params.reaction } } },
+            { new: true }
+        )
+        .then(dbThoughtData => res.json(dbThoughtData))
+        .catch(err => res.status(400).json(err));
     }
 
 };
