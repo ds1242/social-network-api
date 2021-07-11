@@ -55,10 +55,10 @@ const userController = {
         .catch(err => res.json(err));
     },
     // update a user
-    updateUser({ params }, res) {
+    updateUser({ params, body }, res) {
         User.findOneAndUpdate(
-            { _id: params.userId },
-            { $push: { friends: params.friendsId}},
+            { _id: params.id },
+            body,
             { new: true, runValidators: true }
         )
         .then(dbUserData => {
